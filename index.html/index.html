@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منتجات الرحماني</title>
+
+<style>
+* { box-sizing: border-box; }
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: linear-gradient(to bottom, #f4f4f4, #e8f5e9);
+}
+
+/* البنر */
+.banner {
+    width: 100%;
+    height: 320px;
+    overflow: hidden;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;   /* يملي البنر بالكامل */
+}
+
+/* المنتجات */
+.container {
+    padding: 30px;
+    max-width: 1300px;
+    margin: auto;
+}
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+    gap: 20px;
+}
+
+.product {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: 0.3s;
+    padding-bottom: 15px;
+}
+
+.product:hover { transform: translateY(-8px); }
+
+.product img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.product-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.price {
+    color: #0c7c59;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.quantity {
+    width: 60px;
+    padding: 5px;
+    margin-top: 8px;
+}
+
+button {
+    padding: 8px 15px;
+    margin-top: 10px;
+    border: none;
+    background: #0c7c59;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+button:hover { background: #095c42; }
+
+.cart-section {
+    margin-top: 40px;
+    background: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.cart-item { margin-bottom: 10px; }
+
+.whatsapp-float {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    background: #25D366;
+    color: white;
+    padding: 15px 20px;
+    border-radius: 50px;
+    text-decoration: none;
+}
+</style>
+</head>
+
+<body>
+
+<!-- البنر -->
+<div class="banner">
+    <img src="Gemini_Generated_Image_1ixowb1ixowb1ixo.jpg" alt="Logo">
+</div>
+
+<div class="container">
+
+<div class="products-grid">
+
+<!-- المنتجات الأساسية -->
+
+<script>
+function productHTML(id,name,price,img){
+return `
+<div class="product">
+<img src="${img}">
+<div class="product-info">
+<h3>${name}</h3>
+<div class="price">${price} جنيه</div>
+<input type="number" min="1" value="1" class="quantity" id="q${id}">
+<br>
+<button onclick="addToCart('${name}',${price},'q${id}')">أضف للسلة</button>
+</div>
+</div>`;
+}
+
+document.write(
+productHTML(1,"سمنة بلدي",550,"samen.jpg") +
+productHTML(2,"جبنة قديمة",140,"cheese.jpg") +
+productHTML(3,"مورته",140,"download.jpeg") +
+productHTML(4,"ألبان طازة",33.5,"milk.jpg") +
+productHTML(5,"فراخ بلدي",160,"chicken.jpg") +
+productHTML(6,"زبادي بلدي",10,"product6.jpg") +
+productHTML(7,"قشطة بلدي",90,"product7.jpg") +
+productHTML(8,"بيض بلدي",150,"product8.jpg") +
+productHTML(9,"لبنة",70,"product9.jpg") +
+productHTML(10,"رومي بلدي",180,"product10.jpg") +
+
+/* 5 منتجات إضافية جاهزين */
+productHTML(11,"منتج جديد 1",0,"new1.jpg") +
+productHTML(12,"منتج جديد 2",0,"new2.jpg") +
+productHTML(13,"منتج جديد 3",0,"new3.jpg") +
+productHTML(14,"منتج جديد 4",0,"new4.jpg") +
+productHTML(15,"منتج جديد 5",0,"new5.jpg")
+);
+</script>
+
+</div>
+
+<div class="cart-section">
+<h2>🛒 سلة المشتريات</h2>
+<div id="cart"></div>
+<h3 id="total">الإجمالي: 0 جنيه</h3>
+<button onclick="checkout()">إتمام الشراء</button>
+<button onclick="clearCart()">مسح السلة</button>
+</div>
+
+</div>
+
+<a class="whatsapp-float"
+href="https://wa.me/201200887666"
+target="_blank">
+💬 تواصل الآن
+</a>
+
+<script>
+let cart = JSON.parse(localStorage.getItem("cart")) || [];
+let total = 0;
+
+cart.forEach(item => total += item.itemTotal);
+displayCart();
+
+function saveCart(){
+localStorage.setItem("cart", JSON.stringify(cart));
+}
+
+function addToCart(name, price, quantityId) {
+let quantity = parseInt(document.getElementById(quantityId).value);
+let itemTotal = price * quantity;
+
+cart.push({name, price, quantity, itemTotal});
+total += itemTotal;
+
+saveCart();
+displayCart();
+}
+
+function displayCart() {
+let cartDiv = document.getElementById("cart");
+cartDiv.innerHTML = "";
+
+cart.forEach((item, index) => {
+cartDiv.innerHTML += `
+<div class="cart-item">
+${item.name} × ${item.quantity} = ${item.itemTotal} جنيه
+<button onclick="removeItem(${index})">❌</button>
+</div>`;
+});
+
+document.getElementById("total").innerText = "الإجمالي: " + total + " جنيه";
+}
+
+function removeItem(index) {
+total -= cart[index].itemTotal;
+cart.splice(index, 1);
+saveCart();
+displayCart();
+}
+
+function clearCart(){
+cart = [];
+total = 0;
+saveCart();
+displayCart();
+}
+
+function checkout() {
+if(cart.length === 0){
+alert("السلة فارغة");
+return;
+}
+
+let message = "طلب جديد:%0A";
+cart.forEach(item => {
+message += item.name + " × " + item.quantity +
+" = " + item.itemTotal + " جنيه%0A";
+});
+
+message += "%0Aالإجمالي: " + total + " جنيه";
+
+window.open("https://wa.me/201200887666?text=" + message);
+}
+</script>
+
+</body>
+</html>
