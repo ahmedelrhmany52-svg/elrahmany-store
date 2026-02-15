@@ -7,8 +7,8 @@
 
 <style>
 :root {
-    --primary-blue: #1a4a7a; /* اللون الأزرق من الشعار */
-    --accent-gold: #c5a059;  /* اللون الذهبي من التاج */
+    --primary-blue: #1a4a7a;
+    --accent-gold: #c5a059;
     --success-green: #0c7c59;
 }
 
@@ -34,9 +34,10 @@ body {
 }
 
 .hero-banner img {
-    max-width: 280px; /* حجم الشعار */
+    max-width: 280px;
     height: auto;
     margin-bottom: 15px;
+    border-radius: 10px;
 }
 
 .hero-banner h1 {
@@ -171,14 +172,13 @@ body {
 <body>
 
 <header class="hero-banner">
-    <img src="1000178443.jpg" alt="Osman Dairy Products Logo">
+    <img src="Gemini_Generated_Image_1ixowb1ixowb1ixo.jpg" alt="Osman Dairy Products Logo">
     <h1>منتجات الرحماني الأصلية</h1>
     <p>DAIRY PRODUCTS • DAIRY FUN</p>
 </header>
 
 <div class="container">
-    <div class="products-grid" id="productsDisplay">
-        </div>
+    <div class="products-grid" id="productsDisplay"></div>
 
     <div class="cart-section">
         <h2>🛒 سلة المشتريات</h2>
@@ -202,8 +202,8 @@ const products = [
     {id: 3, name: "مورته", price: 140, img: "download.jpeg"},
     {id: 4, name: "ألبان طازة", price: 33.5, img: "milk.jpg"},
     {id: 5, name: "فراخ بلدي", price: 160, img: "chicken.jpg"},
-    {id: 6, name: "زبادي بلدي", price: 10, img: "product6.jpg"},
-    {id: 7, name: "قشطة بلدي", price: 90, img: "product7.jpg"}
+    {id: 6, name: "زبادي بلدي", price: 10, img: "milk.jpg"},
+    {id: 7, name: "قشطة بلدي", price: 90, img: "samen.jpg"}
 ];
 
 function renderProducts() {
@@ -288,7 +288,6 @@ function checkout() {
     window.open("https://wa.me/201200887666?text=" + message);
 }
 
-// تشغيل عند التحميل
 renderProducts();
 displayCart();
 </script>
