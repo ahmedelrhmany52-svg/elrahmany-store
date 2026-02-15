@@ -20,29 +20,31 @@ body {
     color: #333;
 }
 
-/* تصميم البنر الجديد */
+/* تعديل البنر ليكون بكامل عرض الصفحة من البداية */
 .hero-banner {
     background: white;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 40px 20px;
+    padding: 0; /* شلنا المسافات عشان الصورة تلمس الحواف */
     border-bottom: 5px solid var(--primary-blue);
     text-align: center;
     box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
 .hero-banner img {
-    max-width: 280px;
+    width: 100%;       /* الصورة تاخد العرض كامل */
     height: auto;
-    margin-bottom: 15px;
-    border-radius: 10px;
+    display: block;    /* عشان نمنع أي فراغ تحت الصورة */
+    border-radius: 0;  /* شلنا الحواف الدائرية للوجو العريض */
 }
 
+/* إضافة مسافة للنص بعد ما شلنا الـ padding من البنر */
 .hero-banner h1 {
     color: var(--primary-blue);
     font-size: 24px;
+    margin-top: 20px;
     margin-bottom: 5px;
 }
 
@@ -50,9 +52,10 @@ body {
     color: var(--accent-gold);
     font-weight: bold;
     letter-spacing: 1px;
+    margin-bottom: 20px;
 }
 
-/* حاوية المنتجات */
+/* باقي التنسيقات كما هي */
 .container {
     padding: 30px;
     max-width: 1200px;
@@ -130,7 +133,6 @@ body {
 
 .add-btn:hover { background: var(--accent-gold); }
 
-/* سلة المشتريات */
 .cart-section {
     margin-top: 50px;
     background: #fff;
